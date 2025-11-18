@@ -4,32 +4,17 @@
  * 实现由主应用通过 window.__keyer__ 注入
  */
 
-export type NetResponseType = 'json' | 'text' | 'arrayBuffer'
-
-export interface NetFetchRequest {
-  url: string
-  method?: string
-  headers?: Record<string, string>
-  body?: unknown
-  responseType?: NetResponseType
-  timeoutMs?: number
-}
-
-export interface NetFetchResponse {
-  ok: boolean
-  status: number
-  statusText: string
-  headers: Record<string, string>
-  body: unknown
-  responseType: NetResponseType
-  encoding?: 'utf-8' | 'base64'
-  error?: string
-}
-
 export interface ClipboardImage {
   dataURL: string  // base64 data URL
   width: number
   height: number
+}
+
+export interface ExecOptions {
+  /** 命令执行窗口类型 */
+  window?: 'new' | 'terminal'
+  /** 工作目录 */
+  cwd?: string
 }
 
 interface IKeyerAPI {
@@ -57,6 +42,10 @@ interface IKeyerAPI {
   clipboardReadImage(): Promise<ClipboardImage | null>
   /** 写入剪切板图片 */
   clipboardWriteImage(dataURL: string): Promise<void>
+
+  // ============ 命令执行 API ============
+  /** 执行命令 */
+  exec(command: string, options?: ExecOptions): Promise<void>
 }
 
 declare global {
