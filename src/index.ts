@@ -95,6 +95,8 @@ export { Panel } from './components/Panel'
 export type { PanelProps } from './components/Panel'
 export { Text as KeyerText } from './components/Text'
 export type { TextProps as KeyerTextProps, TextVariant as KeyerTextVariant } from './components/Text'
+export { ColorModeProvider, useColorMode } from './components/ColorModeProvider'
+export type { ColorModeProviderProps } from './components/ColorModeProvider'
 // Keyer API
 export { Keyer } from './Keyer'
 export type { ClipboardImage, ExecOptions } from './Keyer'
