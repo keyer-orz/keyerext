@@ -87,13 +87,17 @@ export interface ExtensionPackage {
 
 // React Components
 export { List, Item } from './components/List'
+export { List as ViewList } from './view/List'
 export type { ListItem, ListSection, ListProps, ItemProps } from './components/List'
-export { Input } from './components/Input'
-export type { InputProps, InputHandle } from './components/Input'
+export { Input as KeyerInput } from './components/Input'
+export type { InputProps as KeyerInputProps, InputHandle as KeyerInputHandle } from './components/Input'
 export { Panel } from './components/Panel'
 export type { PanelProps } from './components/Panel'
-export { Text } from './components/Text'
-export type { TextProps, TextVariant } from './components/Text'
+export { Text as KeyerText } from './components/Text'
+export type { TextProps as KeyerTextProps, TextVariant as KeyerTextVariant } from './components/Text'
 // Keyer API
 export { Keyer } from './Keyer'
 export type { ClipboardImage, ExecOptions } from './Keyer'
+
+// Chakra UI
+export * from '@chakra-ui/react'
