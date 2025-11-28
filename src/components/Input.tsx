@@ -5,7 +5,8 @@ export interface InputProps {
   placeholder?: string
   onChange?: (value: string) => void
   autoFocus?: boolean
-  className?: string
+  className?: string,
+  style?: React.CSSProperties
 }
 
 export interface InputRef {
@@ -21,7 +22,8 @@ export const Input = forwardRef<InputRef, InputProps>(({
   placeholder,
   onChange,
   autoFocus = false,
-  className = ''
+  className = '',
+  style
 }, ref) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -51,6 +53,7 @@ export const Input = forwardRef<InputRef, InputProps>(({
     <input
       ref={inputRef}
       type="text"
+      style={style}
       className={`keyer-input ${className}`}
       value={value}
       placeholder={placeholder}
