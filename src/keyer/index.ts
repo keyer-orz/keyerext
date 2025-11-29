@@ -159,6 +159,13 @@ export interface IKeyer {
      * 显示应用窗口
      */
     show(): Promise<void>
+
+    /**
+     * 获取应用图标（返回 base64 PNG）
+     * @param appPath 应用路径（.app）
+     * @returns base64 PNG 字符串
+     */
+    getFileIcon(appPath: string): Promise<string>
   }
 }
 
