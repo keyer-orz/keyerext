@@ -18,44 +18,7 @@ export function Image({
     height,
     className,
     style,
-    onLoad,
-    onError,
-    fallback
 }: ImageProps) {
-    const [imageSrc, setImageSrc] = useState<string>('')
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<Error | null>(null)
-
-    useEffect(() => {
-        loadImage()
-    }, [src])
-
-
-    const loadImage = async () => {
-        console.log(`[Image] Loading image from src: ${src}`)
-        if (!src) {
-            console.error('[Image] No source provided')
-            setError(new Error('No source provided'))
-            setLoading(false)
-            return
-        }
-
-        setLoading(true)
-        setError(null)
-
-        try {
-            setImageSrc(src)
-            setLoading(false)
-            onLoad?.()
-        } catch (err) {
-            console.error('[Image] Error loading image:', err)
-            const error = err instanceof Error ? err : new Error('Failed to load image')
-            setError(error)
-            setLoading(false)
-            onError?.(error)
-        }
-    }
-
     const imageStyle: React.CSSProperties = {
         ...style,
         width,
@@ -63,44 +26,35 @@ export function Image({
         objectFit: 'contain'
     }
 
-    if (loading) {
+    // 只处理http(s)或app开头的src
+    if (/^(https?:|app)/.test(src)) {
+        return (
+            <img
+                src={src}
+                alt={alt}
+                className={`keyer-image ${className || ''}`}
+                style={imageStyle}
+            />
+        )
+    } else {
+        // 不是http/app开头，展示首字符或表情
+        // print unicode
+        console.log([...src].map(c => c.charCodeAt(0).toString(16)).join(' '))
+        const displayChar = src || '🖼️'
         return (
             <div 
-                className={`keyer-image-loading ${className || ''}`}
-                style={imageStyle}
+                className={`keyer-image-fallback ${className || ''}`}
+                style={{
+                    ...imageStyle,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: typeof width === 'number' ? width / 1.5 : 32
+                }}
+                title={alt}
             >
-                <div className="keyer-image-spinner" />
+                {displayChar}
             </div>
         )
     }
-
-    if (error || !imageSrc) {
-        if (fallback) {
-            return <>{fallback}</>
-        }
-        return (
-            <div 
-                className={`keyer-image-error ${className || ''}`}
-                style={imageStyle}
-                title={error?.message || 'Failed to load image'}
-            >
-                <span className="keyer-image-error-icon">🖼️</span>
-            </div>
-        )
-    }
-
-    return (
-        <img
-            src={imageSrc}
-            alt={alt}
-            className={`keyer-image ${className || ''}`}
-            style={imageStyle}
-            onLoad={() => onLoad?.()}
-            onError={(e) => {
-                const error = new Error('Image load failed')
-                setError(error)
-                onError?.(error)
-            }}
-        />
-    )
 }
