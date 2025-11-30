@@ -1,7 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-
-import { Keyer } from '../keyer'
-
+import React, { useState, useEffect } from 'react'
 export interface ImageProps {
     src: string
     alt?: string
@@ -35,7 +32,9 @@ export function Image({
 
 
     const loadImage = async () => {
+        console.log(`[Image] Loading image from src: ${src}`)
         if (!src) {
+            console.error('[Image] No source provided')
             setError(new Error('No source provided'))
             setLoading(false)
             return
@@ -45,51 +44,15 @@ export function Image({
         setError(null)
 
         try {
-            let finalSrc: string
-
-            if (src.startsWith('app://')) {
-                // 通过 Keyer.app.getFileIcon 获取主进程的 base64 图标
-                const appPath = src.replace('app://', '')
-                if (Keyer?.app?.getFileIcon) {
-                    finalSrc = await Keyer.app.getFileIcon(appPath)
-                } else {
-                    throw new Error('Keyer.app.getFileIcon not available')
-                }
-            } else if (src.startsWith('http://') || src.startsWith('https://')) {
-                // 处理 HTTP/HTTPS URL
-                finalSrc = await handleHttpUrl(src)
-            } else {
-                // 直接使用源地址（如 data: URLs）
-                finalSrc = src
-            }
-            setImageSrc(finalSrc)
+            setImageSrc(src)
             setLoading(false)
             onLoad?.()
-
         } catch (err) {
+            console.error('[Image] Error loading image:', err)
             const error = err instanceof Error ? err : new Error('Failed to load image')
             setError(error)
             setLoading(false)
             onError?.(error)
-        }
-    }
- 
-    const handleHttpUrl = async (url: string): Promise<string> => {
-        try {
-            const response = await fetch(url)
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-            }
-
-            const blob = await response.blob()
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader()
-                reader.onload = () => resolve(reader.result as string)
-                reader.onerror = () => reject(new Error('Failed to read image blob'))
-                reader.readAsDataURL(blob)
-            })
-        } catch (err) {
-            throw new Error(`Failed to fetch image: ${url} - ${err}`)
         }
     }
 
