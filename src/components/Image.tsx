@@ -38,8 +38,6 @@ export function Image({
         )
     } else {
         // 不是http/app开头，展示首字符或表情
-        // print unicode
-        console.log([...src].map(c => c.charCodeAt(0).toString(16)).join(' '))
         const displayChar = src || '🖼️'
         return (
             <div 
