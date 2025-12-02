@@ -9,6 +9,7 @@ export interface ImageProps {
     onLoad?: () => void
     onError?: (error: Error) => void
     fallback?: React.ReactNode
+    ctx?: any
 }
 
 export function Image({
@@ -18,6 +19,7 @@ export function Image({
     height,
     className,
     style,
+    ctx,
 }: ImageProps) {
     const imageStyle: React.CSSProperties = {
         ...style,
@@ -25,9 +27,11 @@ export function Image({
         height,
         objectFit: 'contain'
     }
-
     // 只处理http(s)或app开头的src
-    if (/^(https?:|app)/.test(src)) {
+    if (/^(https?:|app|asset)/.test(src)) {
+        if (src.startsWith('asset://')) {
+            src = src.replace('asset://', `asset://${ctx.dir}/assets/`)
+        }
         return (
             <img
                 src={src}

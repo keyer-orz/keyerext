@@ -41,6 +41,7 @@ export interface IExtension {
      * 扩展数据存储（由框架注入）
      */
     store?: IExtensionStore;
+    dir?: string;
     
     load?(): ICommand[];
     preview?(input: string): React.ReactElement | null;
