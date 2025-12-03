@@ -7,12 +7,12 @@ export interface ListItem<T = any> {
 }
 
 export interface ListGroup<T = any> {
-  title?: string
+  title?: string | React.ReactElement | (() => React.ReactElement)
   items: ListItem<T>[]
 }
 
 export interface ListProps<T = any> {
-  groups: ListGroup<T>[]
+  items: ListGroup<T>[] | ListItem<T>[]
   selectedId?: string
   onClick?: (id: string, data: T) => void  // 鼠标单击
   onSelect?: (id: string, data: T) => void // 键盘或鼠标选中
@@ -21,10 +21,25 @@ export interface ListProps<T = any> {
   className?: string
 }
 
-export function List<T = any>({ groups, selectedId, onClick, onSelect, onEnter, renderItem, className = '' }: ListProps<T>) {
+export function List<T = any>({ items, selectedId, onClick, onSelect, onEnter, renderItem, className = '' }: ListProps<T>) {
   const [hoverId, setHoverId] = useState<string | null>(null)
   const [internalSelectedId, setInternalSelectedId] = useState<string | undefined>(selectedId)
   const isPageVisible = usePageVisible()
+  
+  // 标准化 items 为 groups 格式
+  const groups: ListGroup<T>[] = React.useMemo(() => {
+    if (items.length === 0) return []
+    
+    // 检查是否是 ListGroup[] 格式
+    const firstItem = items[0]
+    if ('items' in firstItem) {
+      return items as ListGroup<T>[]
+    }
+    
+    // 否则是 ListItem[] 格式，转换为单个 group
+    return [{ items: items as ListItem<T>[] }]
+  }, [items])
+  
   // 获取所有项的扁平列表
   const allItems = groups.flatMap(group => group.items)
   const currentSelectedId = selectedId !== undefined ? selectedId : internalSelectedId
@@ -98,12 +113,19 @@ export function List<T = any>({ groups, selectedId, onClick, onSelect, onEnter, 
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isPageVisible, allItems, currentSelectedId, handleClick, handleSelect, handleEnter])
 
+  const renderTitle = (title: string | React.ReactElement | (() => React.ReactElement)) => {
+    if (typeof title === 'function') {
+      return title()
+    }
+    return title
+  }
+
   return (
     <div className={`keyer-list ${className}`}>
       {groups.map((group, groupIndex) => (
         <div key={groupIndex} className="keyer-list-group">
           {group.title && (
-            <div className="keyer-list-group-title">{group.title}</div>
+            <div className="keyer-list-group-title">{renderTitle(group.title)}</div>
           )}
           {group.items.map((item) => {
             const isSelected = item.id === currentSelectedId
