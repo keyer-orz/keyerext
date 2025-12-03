@@ -2,17 +2,8 @@
   "name": "keyerext",
   "version": "1.0.0",
   "description": "Type definitions and React components SDK for Keyer extensions",
-  "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
-    }
-  },
   "sideEffects": false,
   "files": [
     "dist",
