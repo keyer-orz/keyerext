@@ -1,4 +1,5 @@
 import React from 'react'
+import { useExtensionContext } from '../contexts/ExtensionContext'
 export interface ImageProps {
     src: string
     alt?: string
@@ -18,8 +19,7 @@ export function Image({
     width,
     height,
     className,
-    style,
-    ctx,
+    style
 }: ImageProps) {
     const imageStyle: React.CSSProperties = {
         ...style,
@@ -27,10 +27,11 @@ export function Image({
         height,
         objectFit: 'contain'
     }
+    let {meta} = useExtensionContext()
     // 只处理http(s)或app开头的src
     if (/^(https?:|app|asset)/.test(src)) {
         if (src.startsWith('asset://')) {
-            src = src.replace('asset://', `asset://${ctx.dir}/assets/`)
+            src = src.replace('asset://', `asset://${meta.dir}/assets/`)
         }
         return (
             <img

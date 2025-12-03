@@ -38,6 +38,9 @@ export { useInputEscapeHandler } from './hooks/useInputEscapeHandler'
 export { usePageVisible } from './hooks/usePageVisible'
 export { useAutoFocusOnVisible } from './hooks/useAutoFocusOnVisible'
 
+// Extension Context
+export { ExtensionContext, useExtensionContext, type ExtensionContextType, type IExtensionMeta } from './contexts/ExtensionContext'
+
 // UI Components
 export { Text, type TextProps } from './components/Text'
 export { List, type ListProps, type ListItem, type ListGroup } from './components/List'

@@ -5,6 +5,7 @@ export interface PageStackItem {
   element: ReactElement
   escapeHandler?: () => boolean
   windowSize?: { width: number; height: number }
+  extensionName?: string  // 扩展名称，用于获取扩展上下文
 }
 
 export interface NavigationContextType {
