@@ -1,7 +1,6 @@
 import { createContext, useContext } from 'react'
 
 // 扩展上下文类型定义
-// 注意：这里只定义类型接口，不包含具体实现，避免循环依赖
 export interface IExtensionMeta {
   dir: string
 }
