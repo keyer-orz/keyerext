@@ -1,11 +1,12 @@
 import { createContext, ReactElement } from 'react'
+import { IExtensionMeta } from './ExtensionContext';
 
 export interface PageStackItem {
   pageName: string
   element: ReactElement
   escapeHandler?: () => boolean
   windowSize?: { width: number; height: number }
-  extensionName?: string  // 扩展名称，用于获取扩展上下文
+  ctx: IExtensionMeta
 }
 
 export interface NavigationContextType {
