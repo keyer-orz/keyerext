@@ -7,10 +7,6 @@ export interface ImageProps {
     height?: number | string
     className?: string
     style?: React.CSSProperties
-    onLoad?: () => void
-    onError?: (error: Error) => void
-    fallback?: React.ReactNode
-    ctx?: any
 }
 
 export function Image({
@@ -29,9 +25,9 @@ export function Image({
     }
     let {meta} = useExtensionContext()
     // 只处理http(s)或app开头的src
-    if (/^(https?:|app|asset)/.test(src)) {
-        if (src.startsWith('asset://')) {
-            src = src.replace('asset://', `asset://${meta.dir}/assets/`)
+    if (/^(https?:|app|assets)/.test(src)) {
+        if (src.startsWith('assets')) {
+            src = src.replace('assets', `asset://${meta.dir}/assets/`)
         }
         return (
             <img
