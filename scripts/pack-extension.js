@@ -59,7 +59,7 @@ if (!fs.existsSync(releaseDir)) {
 }
 
 // 生成压缩包名称
-const tarName = `${pkg.name}.tar.gz`
+const tarName = `release.tar.gz`
 const tarPath = path.join(releaseDir, tarName)
 
 // 打包命令
