@@ -9,8 +9,12 @@
   "sideEffects": false,
   "files": [
     "dist",
+    "scripts",
     "README.md"
   ],
+  "bin": {
+    "keyerext-pack": "./scripts/pack-extension.js"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
