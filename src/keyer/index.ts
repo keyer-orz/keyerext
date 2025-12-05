@@ -5,42 +5,13 @@
  * 插件可以通过 Keyer 实例访问应用的核心能力
  */
 
-/**
- * 剪贴板数据类型
- */
-export interface ClipboardData {
-  /**
-   * 文本内容
-   */
-  text?: string
+import IMainAPI, { ExecResult } from "./main-api"
+import IRenderAPI, { ClipboardData } from "./render-api"
 
-  /**
-   * 图片内容 (Base64 编码)
-   */
-  image?: string
-
-  /**
-   * HTML 内容
-   */
-  html?: string
-}
-
-/**
- * 命令执行模式
- */
-export type ExecOptions = {
-  mode?: 'terminal' | 'window'
-  cwd?: string
-}
-
-/**
- * 命令执行结果
- */
-export interface ExecResult {
-  success: boolean
-  output?: string
-  error?: string
-}
+// Re-export types from main-api and render-api
+export type { ExecResult, ClipboardData }
+export type { default as IMainAPI } from "./main-api"
+export type { default as IRenderAPI } from "./render-api"
 
 /**
  * 扩展数据存储接口
@@ -88,80 +59,7 @@ export interface IExtensionStore {
   save(): Promise<void>
 }
 
-/**
- * Keyer 核心能力接口
- */
-export interface IKeyer {
-  /**
-   * 执行命令
-   * @param cmd 要执行的命令
-   * @param mode 执行模式: terminal(系统终端) 或 window(新窗口)
-   * @returns 执行结果的 Promise
-   */
-  exec(cmd: string, opt?: ExecOptions): Promise<ExecResult>
-
-  /**
-   * 剪贴板操作
-   */
-  clipboard: {
-    /**
-     * 读取剪贴板内容
-     * @returns 剪贴板数据
-     */
-    read(): Promise<ClipboardData>
-
-    /**
-     * 读取剪贴板文本
-     * @returns 文本内容
-     */
-    readText(): Promise<string>
-
-    /**
-     * 读取剪贴板图片
-     * @returns 图片的 Base64 编码
-     */
-    readImage(): Promise<string | null>
-
-    /**
-     * 写入文本到剪贴板
-     * @param text 要写入的文本
-     */
-    writeText(text: string): Promise<void>
-
-    /**
-     * 写入图片到剪贴板
-     * @param image 图片的 Base64 编码或 Buffer
-     */
-    writeImage(image: string | Buffer): Promise<void>
-
-    /**
-     * 写入 HTML 到剪贴板
-     * @param html HTML 内容
-     */
-    writeHtml(html: string): Promise<void>
-
-    /**
-     * 清空剪贴板
-     */
-    clear(): Promise<void>
-  }
-
-  /**
-   * 应用控制
-   */
-  app: {
-    /**
-     * 隐藏应用窗口
-     */
-    hide(): Promise<void>
-
-    /**
-     * 显示应用窗口
-     */
-    show(): Promise<void>
-
-  }
-}
+export interface IKeyer extends IMainAPI, IRenderAPI {}
 
 /**
  * 全局 Keyer 实例

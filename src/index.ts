@@ -57,4 +57,4 @@ export { Drawer, type DrawerProps } from './components/Drawer'
 export { Image, type ImageProps } from './components/Image'
 
 // Keyer Core Capabilities
-export { Keyer, setKeyer, type IKeyer, type IExtensionStore, type ClipboardData, type ExecOptions, type ExecResult } from './keyer'
+export { Keyer, setKeyer, type IKeyer, type IMainAPI, type IRenderAPI, type IExtensionStore, type ExecResult, type ClipboardData } from './keyer'
