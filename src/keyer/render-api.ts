@@ -4,7 +4,7 @@ export interface ClipboardData {
   html?: string
 }
 
-export default interface IRenderAPI {
+export interface IRenderAPI {
     clipboard: {
         read(): Promise<ClipboardData>
         readText(): Promise<string>

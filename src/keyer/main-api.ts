@@ -4,7 +4,7 @@ export interface ExecResult {
   error?: string
 }
 
-export default interface IMainAPI {
+export interface IMainAPI {
   window: {
     show(): Promise<void>
     hide(): Promise<void>
