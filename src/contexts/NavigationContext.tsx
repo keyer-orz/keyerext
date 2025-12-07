@@ -1,12 +1,12 @@
 import { createContext, ReactElement } from 'react'
-import { IExtensionMeta } from './ExtensionContext';
+import { ExtensionContextType } from './ExtensionContext';
 
 export interface PageStackItem {
   pageName: string
   element: ReactElement
   escapeHandler?: () => boolean
   windowSize?: { width: number; height: number }
-  ctx: IExtensionMeta
+  ctx: ExtensionContextType
 }
 
 export interface NavigationContextType {

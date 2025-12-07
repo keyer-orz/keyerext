@@ -1,12 +1,7 @@
 import { createContext, useContext } from 'react'
 
-// 扩展上下文类型定义
-export interface IExtensionMeta {
-  dir: string
-}
-
 export interface ExtensionContextType {
-  meta: IExtensionMeta
+  dir: string;
 }
 
 export const ExtensionContext = createContext<ExtensionContextType | undefined>(undefined)

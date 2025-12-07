@@ -23,11 +23,11 @@ export function Image({
         height,
         objectFit: 'contain'
     }
-    let {meta} = useExtensionContext()
+    let { dir } = useExtensionContext()
     // 只处理http(s)或app开头的src
     if (/^(https?:|app|assets)/.test(src)) {
         if (src.startsWith('assets')) {
-            src = src.replace('assets', `asset://${meta.dir}/assets/`)
+            src = src.replace('assets', `asset://${dir}/assets/`)
         }
         return (
             <img
@@ -41,7 +41,7 @@ export function Image({
         // 不是http/app开头，展示首字符或表情
         const displayChar = src || '🖼️'
         return (
-            <div 
+            <div
                 className={`keyer-image-fallback ${className || ''}`}
                 style={{
                     ...imageStyle,
