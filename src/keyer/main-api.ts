@@ -23,4 +23,8 @@ export interface IMainAPI {
     terminal: (cmd: string, cwd?: string) => Promise<ExecResult>
     window: (cmd: string, cwd?: string) => Promise<ExecResult>
   }
+  path: {
+    userData: (dir?: string) => string
+    appPath: (dir?: string) => string
+  }
 }
