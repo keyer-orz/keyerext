@@ -24,7 +24,7 @@ export interface IMainAPI {
     window: (cmd: string, cwd?: string) => Promise<ExecResult>
   }
   path: {
-    userData: (dir?: string) => string
-    appPath: (dir?: string) => string
+    userData: (...dirs: string[]) => string
+    appPath: (...dirs: string[]) => string
   }
 }
