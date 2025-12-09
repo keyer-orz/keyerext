@@ -16,8 +16,10 @@ export interface IMainAPI {
     selectDirectory: () => Promise<string | undefined>
   }
   shortcuts: {
-    updateGlobal: (shortcut: string) => Promise<boolean>
+    updateGlobal: (shortcut: string) => Promise<boolean> // save and register global shortcut
     updateCommand: (cmdId: string, shortcut: string | undefined) => Promise<boolean>
+    registerGlobal: (shortcut: string) => Promise<boolean>
+    registerCommand: (cmdId: string, shortcut: string | undefined) => Promise<boolean>
   }
   exec: {
     terminal: (cmd: string, cwd?: string) => Promise<ExecResult>
