@@ -2,51 +2,50 @@
  * 扩展数据存储接口
  */
 export interface IExtensionStore {
-  /**
-   * 获取数据
-   * @param key 键名
-   * @param defaultValue 默认值
-   */
-  get<T = any>(key: string, defaultValue?: T): T
+    /**
+     * 获取数据
+     * @param key 键名
+     * @param defaultValue 默认值
+     */
+    get<T = any>(key: string, defaultValue?: T): T
 
-  /**
-   * 设置数据
-   * @param key 键名
-   * @param value 值
-   */
-  set<T = any>(key: string, value: T): void
+    /**
+     * 设置数据
+     * @param key 键名
+     * @param value 值
+     */
+    set<T = any>(key: string, value: T): void
 
-  /**
-   * 删除数据
-   * @param key 键名
-   */
-  delete(key: string): void
+    /**
+     * 删除数据
+     * @param key 键名
+     */
+    delete(key: string): void
 
-  /**
-   * 检查键是否存在
-   * @param key 键名
-   */
-  has(key: string): boolean
+    /**
+     * 检查键是否存在
+     * @param key 键名
+     */
+    has(key: string): boolean
 
-  /**
-   * 清空所有数据
-   */
-  clear(): void
+    /**
+     * 清空所有数据
+     */
+    clear(): void
 
-  /**
-   * 获取所有键名
-   */
-  keys(): string[]
+    /**
+     * 获取所有键名
+     */
+    keys(): string[]
 
-  /**
-   * 保存到文件（自动调用，通常不需要手动调用）
-   */
-  save(): Promise<void>
+    /**
+     * 保存到文件（自动调用，通常不需要手动调用）
+     */
+    save(): Promise<void>
 }
 
 
 export type ICommand = {
-    id?: string
     name: string
     title?: string
     icon?: string
@@ -63,6 +62,10 @@ export namespace WindowSize {
     export const Wide = { width: 1200, height: 600 }  // 适合左右分屏
 }
 
+export type CommandResult = React.ReactElement | null | {
+    component: React.ReactElement
+    size: { width: number, height: number }
+}
 export interface IExtension {
     /**
      * 扩展数据存储（由框架注入）

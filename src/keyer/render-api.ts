@@ -1,3 +1,5 @@
+import { CommandResult, IExtensionStore } from '../types';
+
 export interface ClipboardData {
   text?: string
   image?: string
@@ -13,5 +15,9 @@ export interface IRenderAPI {
         writeImage(image: string | Buffer): Promise<void>
         writeHtml(html: string): Promise<void>
         clear(): Promise<void>
+    },
+    command: {
+      register(cmd: string, handler: () => CommandResult): Promise<void>
     }
+    store: IExtensionStore
 }
