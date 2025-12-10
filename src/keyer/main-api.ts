@@ -36,10 +36,9 @@ export interface IMainAPI {
     extract: (archivePath: string, targetPath: string) => Promise<boolean>
   }
   shortcuts: {
-    updateGlobal: (shortcut: string) => Promise<boolean> // save and register global shortcut
-    updateCommand: (cmdId: string, shortcut: string | undefined) => Promise<boolean>
-    registerGlobal: (shortcut: string) => Promise<boolean>
+    registerApp: (shortcut: string) => Promise<boolean>
     registerCommand: (cmdId: string, shortcut: string | undefined) => Promise<boolean>
+    unregister(shortcut: string): Promise<boolean>
   }
   exec: {
     terminal: (cmd: string, cwd?: string) => Promise<ExecResult>
