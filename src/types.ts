@@ -50,9 +50,6 @@ export type ICommand = {
     title?: string
     icon?: string
     desc?: string
-    extTitle?: string
-    type?: string // 类型
-    windowSize?: { width: number; height: number } // 窗口尺寸（可选，不配置则使用默认尺寸）
 }
 
 export namespace WindowSize {
@@ -62,16 +59,7 @@ export namespace WindowSize {
     export const Wide = { width: 1200, height: 600 }  // 适合左右分屏
 }
 
-export type CommandResult = React.ReactElement | null | {
-    component: React.ReactElement
+export type CommandResult = JSX.Element | null | {
+    component: JSX.Element
     size: { width: number, height: number }
-}
-export interface IExtension {
-    /**
-     * 扩展数据存储（由框架注入）
-     */
-    store?: IExtensionStore;
-    load?(): ICommand[];
-    preview?(input: string): React.ReactElement | null;
-    run(name: string): React.ReactElement | null;
 }
