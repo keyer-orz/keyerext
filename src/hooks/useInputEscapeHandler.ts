@@ -1,9 +1,9 @@
-import { RefObject } from 'react'
+import { RefObject, useCallback } from 'react'
 import { useEscapeHandler } from './useEscapeHandler'
 import type { InputRef } from '../components/Input'
  
 export function useInputEscapeHandler(inputRef: RefObject<InputRef>) {
-  useEscapeHandler(() => {
+  const handler = useCallback(() => {
     const input = inputRef.current
 
     if (!input) {
@@ -22,5 +22,7 @@ export function useInputEscapeHandler(inputRef: RefObject<InputRef>) {
     }
 
     return true
-  })
+  }, [inputRef])
+
+  useEscapeHandler(handler)
 }
