@@ -1,15 +1,21 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNavigation } from './useNavigation'
 
 export function useEscapeHandler(handler: boolean | (() => boolean)) {
-  const { registerEscapeHandler, unregisterEscapeHandler } = useNavigation()
+  const navigation = useNavigation()
+  const handlerRef = useRef(handler)
+
+  // 保持 handler 引用最新
+  useEffect(() => {
+    handlerRef.current = handler
+  })
 
   useEffect(() => {
     const escapeHandler = () => {
-      return typeof handler === 'function' ? handler() : !handler
+      return typeof handlerRef.current === 'function' ? handlerRef.current() : !handlerRef.current
     }
 
-    registerEscapeHandler(escapeHandler)
-    return unregisterEscapeHandler
-  }, [handler, registerEscapeHandler, unregisterEscapeHandler])
+    navigation.registerEscapeHandler(escapeHandler)
+    return () => navigation.unregisterEscapeHandler()
+  }, []) // 空依赖数组，只在 mount/unmount 时执行
 }
