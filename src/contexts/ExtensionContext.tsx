@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react'
 
 export interface ExtensionContextType {
   dir: string;
+  name: string;
+  title: string;
 }
 
 export const ExtensionContext = createContext<ExtensionContextType | undefined>(undefined)
