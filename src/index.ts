@@ -6,7 +6,6 @@ export * from './contexts/ExtensionContext'
 
 // Hooks
 export * from './hooks/useNavigation'
-export * from './hooks/useEscapeHandler'
 export * from './hooks/useInputEscapeHandler'
 export * from './hooks/usePageVisible'
 export * from './hooks/useAutoFocusOnVisible'

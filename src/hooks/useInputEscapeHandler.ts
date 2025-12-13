@@ -1,11 +1,13 @@
 import { RefObject, useCallback } from 'react'
-import { useEscapeHandler } from './useEscapeHandler'
 import type { InputRef } from '../components/Input'
- 
+import { useNavigation } from './useNavigation'
+import { usePageVisible } from './usePageVisible'
+
 export function useInputEscapeHandler(inputRef: RefObject<InputRef>) {
+  const { escapeHandler } = useNavigation()
+  const isPageVisible = usePageVisible()
   const handler = useCallback(() => {
     const input = inputRef.current
-
     if (!input) {
       return true
     }
@@ -24,5 +26,6 @@ export function useInputEscapeHandler(inputRef: RefObject<InputRef>) {
     return true
   }, [inputRef])
 
-  useEscapeHandler(handler)
+  if (isPageVisible)
+    escapeHandler(handler)
 }
