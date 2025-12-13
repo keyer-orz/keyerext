@@ -18,7 +18,6 @@ export interface IRenderAPI {
   },
   command: {
     register(cmd: ICommand, handler: () => CommandResult): Promise<void>  // 注册插件
-    preview(cmd: string, handler: (input: string) => JSX.Element | null): Promise<void> // 预览输入
   }
   store: IExtensionStore
 }
