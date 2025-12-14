@@ -18,10 +18,12 @@ export interface ListProps<T = any> {
   onSelect?: (id: string, data: T) => void // 键盘或鼠标选中
   onEnter?: (id: string, data: T) => void  // 回车/双击
   renderItem: (item: ListItem<T>, isSelected: boolean, isHovered: boolean) => React.ReactNode
+  renderHeader?: () => React.ReactNode  // 固定头部，不随列表滚动
   className?: string
+  style?: React.CSSProperties
 }
 
-export function List<T = any>({ items, selectedId, onClick, onSelect, onEnter, renderItem, className = '' }: ListProps<T>) {
+export function List<T = any>({ items, selectedId, onClick, onSelect, onEnter, renderItem, renderHeader, className = '', style }: ListProps<T>) {
   const [hoverId, setHoverId] = useState<string | null>(null)
   const [internalSelectedId, setInternalSelectedId] = useState<string | undefined>(selectedId)
   const isPageVisible = usePageVisible()
@@ -121,7 +123,10 @@ export function List<T = any>({ items, selectedId, onClick, onSelect, onEnter, r
   }
 
   return (
-    <div className={`keyer-list ${className}`}>
+    <div className={`keyer-list ${className}`} style={style}>
+      {renderHeader && (
+        <div className="keyer-list-header">{renderHeader()}</div>
+      )}
       {groups.map((group, groupIndex) => (
         <div key={groupIndex} className="keyer-list-group">
           {group.title && (
