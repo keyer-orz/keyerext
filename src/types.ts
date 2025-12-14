@@ -46,7 +46,7 @@ export interface IExtensionStore {
 
 export enum CommandMode {
     Action = 'action', // 默认模式，执行时加载
-    View = 'view',     // KeyerUI 内嵌视图模式, 执行时加载
+    View = 'view',     // KeyerUI 视图模式, 执行时加载
     Window = 'window', // 独立窗口模式, 执行时加载
     Inline = 'inline'  // 内联模式, 在主界面内嵌显示, 可以接受主界面的 Input 输入, App 启动加载
 }
