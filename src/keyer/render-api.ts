@@ -20,4 +20,7 @@ export interface IRenderAPI {
     register(cmd: ICommand, handler: () => CommandResult): Promise<void>  // 注册插件
   }
   store: IExtensionStore
+  toast: {
+    show(icon: 'info' | 'success' | 'error' | 'warning', message: string, duration?: number): Promise<void>
+  }
 }
