@@ -2,11 +2,14 @@ import React from 'react'
 
 export interface DividerProps {
   vertical?: boolean
-  className?: string
+  style?: React.CSSProperties
 }
 
-export function Divider({ vertical = false, className = '' }: DividerProps) {
+export function Divider({ vertical = false, style }: DividerProps) {
   return (
-    <div className={`${vertical ? 'keyer-divider-vertical' : 'keyer-divider'} ${className}`} />
+    <div 
+      className={vertical ? 'keyer-divider-vertical' : 'keyer-divider'} 
+      style={style}
+    />
   )
 }

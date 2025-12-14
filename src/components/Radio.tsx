@@ -11,7 +11,7 @@ export interface RadioGroupProps<T = any> {
   value?: T
   onChange?: (value: T) => void
   disabled?: boolean
-  className?: string
+  style?: React.CSSProperties
 }
 
 export function RadioGroup<T = any>({
@@ -19,7 +19,7 @@ export function RadioGroup<T = any>({
   value,
   onChange,
   disabled = false,
-  className = ''
+  style
 }: RadioGroupProps<T>) {
   const handleSelect = (option: RadioOption<T>) => {
     if (disabled || option.disabled) return
@@ -35,7 +35,7 @@ export function RadioGroup<T = any>({
   }
 
   return (
-    <div className={`keyer-radio-group ${className}`}>
+    <div style={style} className={`keyer-radio-group`}>
       {options.map((option, index) => {
         const isChecked = option.value === value
         const isDisabled = disabled || option.disabled

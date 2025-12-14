@@ -6,7 +6,7 @@ export interface CheckboxProps {
   label?: string
   disabled?: boolean
   indeterminate?: boolean
-  className?: string
+  style?: React.CSSProperties
 }
 
 export function Checkbox({
@@ -15,7 +15,7 @@ export function Checkbox({
   label,
   disabled = false,
   indeterminate = false,
-  className = ''
+  style
 }: CheckboxProps) {
   const handleClick = () => {
     if (disabled) return
@@ -37,7 +37,7 @@ export function Checkbox({
       tabIndex={disabled ? -1 : 0}
       className={`keyer-checkbox ${checked ? 'keyer-checkbox-checked' : ''} ${
         indeterminate ? 'keyer-checkbox-indeterminate' : ''
-      } ${disabled ? 'keyer-checkbox-disabled' : ''} ${className}`}
+      } ${disabled ? 'keyer-checkbox-disabled' : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >

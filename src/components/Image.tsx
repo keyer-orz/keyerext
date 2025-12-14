@@ -5,7 +5,6 @@ export interface ImageProps {
     alt?: string
     width?: number | string
     height?: number | string
-    className?: string
     style?: React.CSSProperties
 }
 
@@ -14,7 +13,6 @@ export function Image({
     alt = '',
     width,
     height,
-    className,
     style
 }: ImageProps) {
     const imageStyle: React.CSSProperties = {
@@ -33,7 +31,7 @@ export function Image({
             <img
                 src={src}
                 alt={alt}
-                className={`keyer-image ${className || ''}`}
+                className={`keyer-image}`}
                 style={imageStyle}
             />
         )
@@ -42,7 +40,7 @@ export function Image({
         const displayChar = src || '🖼️'
         return (
             <div
-                className={`keyer-image-fallback ${className || ''}`}
+                className={`keyer-image-fallback}`}
                 style={{
                     ...imageStyle,
                     display: 'flex',

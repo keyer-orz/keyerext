@@ -4,14 +4,14 @@ export interface SwitchProps {
   checked?: boolean
   onChange?: (checked: boolean) => void
   disabled?: boolean
-  className?: string
+  style?: React.CSSProperties
 }
 
 export function Switch({
   checked = false,
   onChange,
   disabled = false,
-  className = ''
+  style
 }: SwitchProps) {
   const handleClick = () => {
     if (disabled) return
@@ -29,11 +29,12 @@ export function Switch({
   return (
     <div
       role="switch"
+      style={style}
       aria-checked={checked}
       tabIndex={disabled ? -1 : 0}
       className={`keyer-switch ${checked ? 'keyer-switch-checked' : ''} ${
         disabled ? 'keyer-switch-disabled' : ''
-      } ${className}`}
+      }`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >

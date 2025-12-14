@@ -11,7 +11,7 @@ export interface DropdownProps<T = any> {
   value?: T
   placeholder?: string
   onChange?: (value: T) => void
-  className?: string
+  style?: React.CSSProperties
   disabled?: boolean
 }
 
@@ -20,7 +20,7 @@ export function Dropdown<T = any>({
   value,
   placeholder = '请选择...',
   onChange,
-  className = '',
+  style,
   disabled = false
 }: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false)
@@ -51,7 +51,7 @@ export function Dropdown<T = any>({
   }
 
   return (
-    <div ref={dropdownRef} className={`keyer-dropdown ${className}`}>
+    <div ref={dropdownRef} className={`keyer-dropdown`}>
       <button
         className={`keyer-dropdown-trigger ${disabled ? 'keyer-dropdown-disabled' : ''}`}
         onClick={() => !disabled && setIsOpen(!isOpen)}

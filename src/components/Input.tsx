@@ -5,7 +5,7 @@ export interface InputProps {
   placeholder?: string
   onChange?: (value: string) => void
   autoFocus?: boolean
-  className?: string,
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   style?: React.CSSProperties
 }
 
@@ -22,7 +22,7 @@ export const Input = forwardRef<InputRef, InputProps>(({
   placeholder,
   onChange,
   autoFocus = false,
-  className = '',
+  onKeyDown,
   style
 }, ref) => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -54,10 +54,11 @@ export const Input = forwardRef<InputRef, InputProps>(({
       ref={inputRef}
       type="text"
       style={style}
-      className={`keyer-input ${className}`}
+      className="keyer-input"
       value={value}
       placeholder={placeholder}
       onChange={(e) => onChange?.(e.target.value)}
+      onKeyDown={onKeyDown}
       autoFocus={autoFocus}
     />
   )

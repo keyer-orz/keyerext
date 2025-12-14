@@ -3,14 +3,13 @@ import React from 'react'
 export interface StackProps {
   children: React.ReactNode
   spacing?: number
-  className?: string
   style?: React.CSSProperties
 }
 
-export function HStack({ children, spacing = 8, className = '', style = {} }: StackProps) {
+export function HStack({ children, spacing = 8, style = {} }: StackProps) {
   return (
     <div
-      className={`keyer-hstack ${className}`}
+      className="keyer-hstack"
       style={{ gap: `${spacing}px`, ...style }}
     >
       {children}
@@ -18,10 +17,10 @@ export function HStack({ children, spacing = 8, className = '', style = {} }: St
   )
 }
 
-export function VStack({ children, spacing = 8, className = '', style = {} }: StackProps) {
+export function VStack({ children, spacing = 8, style = {} }: StackProps) {
   return (
     <div
-      className={`keyer-vstack ${className}`}
+      className="keyer-vstack"
       style={{ gap: `${spacing}px`, ...style }}
     >
       {children}

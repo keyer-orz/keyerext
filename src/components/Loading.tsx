@@ -5,7 +5,7 @@ export interface LoadingProps {
   text?: string
   fullscreen?: boolean
   overlay?: boolean
-  className?: string
+  style?: React.CSSProperties
 }
 
 export function Loading({
@@ -13,14 +13,14 @@ export function Loading({
   text,
   fullscreen = false,
   overlay = false,
-  className = ''
+  style
 }: LoadingProps) {
   const sizeClass = `keyer-loading-${size}`
   const fullscreenClass = fullscreen ? 'keyer-loading-fullscreen' : ''
   const overlayClass = overlay ? 'keyer-loading-overlay' : ''
 
   const content = (
-    <div className={`keyer-loading ${sizeClass} ${className}`}>
+    <div style={style} className={`keyer-loading ${sizeClass}`}>
       <div className="keyer-loading-spinner" />
       {text && <div className="keyer-loading-text">{text}</div>}
     </div>
