@@ -25,6 +25,7 @@ export * from './components/Checkbox'
 export * from './components/Drawer'
 export * from './components/Image'
 export * from './components/Toast'
+export * from './components/FileSelector'
 
 export * from "./keyer/main-api"
 export * from "./keyer/render-api"

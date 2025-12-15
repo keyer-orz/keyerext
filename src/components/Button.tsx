@@ -4,7 +4,7 @@ export interface ButtonProps {
   children: React.ReactNode
   onClick?: () => void
   type?: 'default' | 'primary' | 'danger'
-  size?: 'normal' | 'small'
+  size?: 'big' | 'normal' | 'small'
   disabled?: boolean
   style?: React.CSSProperties
 }
@@ -18,7 +18,7 @@ export function Button({
   style
 }: ButtonProps) {
   const typeClass = `keyer-button-${type}`
-  const sizeClass = size === 'normal' ? 'keyer-button-normal' : 'keyer-button-small'
+  const sizeClass = `keyer-button-${size}`
   const disabledClass = disabled ? 'keyer-button-disabled' : ''
 
   return (

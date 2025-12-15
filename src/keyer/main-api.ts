@@ -33,6 +33,7 @@ export interface IMainAPI {
     read: (path: string) => Promise<string>
     write: (path: string, content: string) => Promise<void>
     selectDirectory: () => Promise<string | undefined>
+    selectFile: (extensions?: string[]) => Promise<string | undefined>
     extract: (archivePath: string, targetPath: string) => Promise<boolean>
   }
   shortcuts: {
